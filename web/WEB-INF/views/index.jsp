@@ -7,9 +7,9 @@
 </head>
 
 <body>
-<form action="">
+<form action="/getString" method="GET">
   SimpleInt<br>
-  <input type="text" name="firstname"><br>
+  <input type="number" name="int"><br>
   <input type="button" name="submit">
 </form>
 </body>
