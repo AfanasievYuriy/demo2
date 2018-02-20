@@ -1,5 +1,6 @@
 package com.demo.time2.service;
 
+import com.demo.time2.DTO.ResultDurationDTO;
 import com.demo.time2.domain.ResultDuration;
 import com.demo.time2.domain.TimePair;
 import java.io.IOException;
@@ -17,9 +18,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResultsHolder {
-    private static final String RESOURCE_DIR_PATH2 = FilenameUtils
-        .separatorsToSystem("src/main/resources/");
-    private static final String RESOURCE_DIR_PATH = "/home/yuriy/IdeaProjects/time2/src/main/resources";
+    private static final String RESOURCE_DIR_PATH = FilenameUtils
+        .separatorsToSystem("/home/yuriy/IdeaProjects/time2/src/main/resources/");
+    //private static final String RESOURCE_DIR_PATH = "/home/yuriy/IdeaProjects/time2/src/main/resources";
     private static final String pattern =
         "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)(.csv)*";
     public static final Pattern fileNamePattern = Pattern.compile(pattern);
@@ -34,6 +35,13 @@ public class ResultsHolder {
         ResultDuration resultDuration = resultMap.get(date);
         if (resultDuration == null) throw new InvalidPathException(date + ".csv", "no such file");
         return resultDuration;
+    }
+
+    public List<ResultDurationDTO> getAllResultDurations() {
+        List<ResultDurationDTO> list = resultMap.entrySet().stream()
+            .map(e -> new ResultDurationDTO(e.getValue(), e.getKey()))
+            .collect(Collectors.toList());
+        return list;
     }
 
     public void initHolder() throws IOException {

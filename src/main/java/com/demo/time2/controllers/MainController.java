@@ -8,12 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
-    @Autowired
-    private ResultsHolder holder;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main() {
-        System.out.println(holder);
         return "index";
     }
 }
