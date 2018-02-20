@@ -3,6 +3,8 @@ package com.demo.time2.service;
 import com.demo.time2.DTO.ResultDurationDTO;
 import com.demo.time2.domain.ResultDuration;
 import com.demo.time2.domain.TimePair;
+import com.demo.time2.service.core.FileParser;
+import com.demo.time2.service.core.TimeCounter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -20,7 +22,6 @@ import org.springframework.stereotype.Component;
 public class ResultsHolder {
     private static final String RESOURCE_DIR_PATH = FilenameUtils
         .separatorsToSystem("/home/yuriy/IdeaProjects/time2/src/main/resources/");
-    //private static final String RESOURCE_DIR_PATH = "/home/yuriy/IdeaProjects/time2/src/main/resources";
     private static final String pattern =
         "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)(.csv)*";
     public static final Pattern fileNamePattern = Pattern.compile(pattern);

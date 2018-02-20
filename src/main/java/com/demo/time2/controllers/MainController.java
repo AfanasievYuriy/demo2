@@ -1,7 +1,5 @@
 package com.demo.time2.controllers;
 
-import com.demo.time2.service.ResultsHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +9,6 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main() {
-        return "index";
+        return "/pages/index.html";
     }
 }

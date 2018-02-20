@@ -1,5 +1,6 @@
 package com.demo.time2.config;
 
+import com.demo.time2.exceptions.InitResultHolderException;
 import com.demo.time2.service.ResultsHolder;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,9 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         try {
             handler.initHolder();
         } catch (IOException e) {
-            System.err.println("SOME TROUBLES WITH RESULT HOLDER");
+            throw new InitResultHolderException(e);
         }
+
 
     }
 

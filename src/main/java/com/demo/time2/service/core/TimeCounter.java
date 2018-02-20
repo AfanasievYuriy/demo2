@@ -1,4 +1,4 @@
-package com.demo.time2.service;
+package com.demo.time2.service.core;
 
 import com.demo.time2.domain.ActionType;
 import com.demo.time2.domain.ResultDuration;
