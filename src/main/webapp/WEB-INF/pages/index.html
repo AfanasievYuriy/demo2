@@ -2,18 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>dsfdsgdsg</title>
+    <title>App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="pages/app.css">
 </head>
-<body>
-    <p style="margin: 0px">Enter file name (date), then submit</p >
-    <form action="/result" method="GET">
-        <input type="text" name="date" placeholder="DD-MM-YY format"><br>
-        <button type="submit">submit</button>
-    </form>
-    <br>
-    <p style="margin: 0px">Enter submit to get all info</p >
-    <form action="/result/all" method="GET">
-        <button type="submit">submit</button>
-    </form>
+<body ng-app="app">
+<div ng-controller="AppController as vm" class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            App
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div>
+                    <table border="1">
+                        <tr>
+                            <th>File name</th>
+                            <th>Time</th>
+                            <th>Has Error</th>
+                        </tr>
+                        <tr ng-repeat="row in ::vm.data">
+                            <td>{{::row.date}}</td>
+                            <td>{{::vm.getTime(row.resultDuration.time)}}</td>
+                            <td>{{::vm.hasError(row.resultDuration.withError)}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <p>Enter file name (date), then submit</p>
+                    <form action="/result" method="GET">
+                        <input type="text" name="date" placeholder="DD-MM-YY format"><br>
+                        <button type="submit">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="pages/app.js"></script>
 </body>
 </html>
