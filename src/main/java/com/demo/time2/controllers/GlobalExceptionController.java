@@ -4,7 +4,6 @@ import com.demo.time2.exceptions.InitResultHolderException;
 import java.nio.file.InvalidPathException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailSendException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -22,7 +21,7 @@ public class GlobalExceptionController {
     }
 
     @ExceptionHandler(InvalidPathException.class)
-    public ResponseEntity<String> mainException (InvalidPathException ex) {
+    public ResponseEntity<String> invalidFilePath (InvalidPathException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

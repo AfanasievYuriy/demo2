@@ -2,6 +2,10 @@ package com.demo.time2.domain;
 
 import java.time.LocalTime;
 
+/**
+ * Class represents pair of action and time values. Time = time, when worker entered (or leaved)
+ * a building
+ */
 public class TimePair {
     private ActionType action;
     private LocalTime time;

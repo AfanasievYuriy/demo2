@@ -1,5 +1,9 @@
 package com.demo.time2.domain;
 
+/**
+ * Enum class that represents action value. Can be IN or OUT according to вход and выход
+ * possible values.
+ */
 public enum ActionType {
     IN("вход"),
     OUT("выход");

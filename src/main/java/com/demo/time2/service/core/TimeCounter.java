@@ -11,6 +11,11 @@ import java.util.List;
 
 public class TimeCounter {
 
+    /**
+     * Parses stack and summing time value.
+     * @param allPairsList
+     * @return time value for a file
+     */
     public ResultDuration getTimeDuration(List<TimePair> allPairsList) {
         Deque<TimePair> stack = validatePairsList(allPairsList);
         long resultMinutes = 0;
@@ -29,6 +34,21 @@ public class TimeCounter {
         return new ResultDuration(LocalTime.MIN.plusMinutes(resultMinutes), withErrors);
     }
 
+    /**
+     * Validates list of {@link TimePair}. For example we have list of {@link TimePair},
+     * all TimePairs is valid:
+     * 1) вход,09:00
+     * 2) выход,10:00
+     * 3) выход,11:00
+     * 4) вход,12:00
+     * 5) вход,13:00
+     * 6) выход,17:00
+     * Algo searches вход-выход pairs only. If there is a "вход" and no "выход", method skip this
+     * {@link TimePair}.
+     * @param allPairsList
+     * @return stack of {@link TimePair}, where there are no "вход" or "выход" values that folows
+     * next to each other
+     */
     Deque<TimePair> validatePairsList(List<TimePair> allPairsList) {
         Deque<TimePair> stack = new LinkedList<>();
 

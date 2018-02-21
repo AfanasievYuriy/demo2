@@ -15,13 +15,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import javax.annotation.Resource;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+/**
+ * Holds result of parsing all files in directory. Class has two service methods: for reading all
+ * data and for getting parsing results of concrete file.
+ */
 @Component
 public class ResultsHolder {
-    private static final String RESOURCE_DIR_PATH = FilenameUtils
-        .separatorsToSystem("/home/yuriy/IdeaProjects/time2/src/main/resources/");
+
+    @Resource
+    private Environment environment;
+
     private static final String pattern =
         "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)(.csv)*";
     public static final Pattern fileNamePattern = Pattern.compile(pattern);
@@ -46,6 +55,7 @@ public class ResultsHolder {
     }
 
     public void initHolder() throws IOException {
+        String RESOURCE_DIR_PATH = environment.getProperty("pathTo");
         List<Path> filePathes = Files
             .list(Paths.get(RESOURCE_DIR_PATH))
             .filter(p -> p.toString().endsWith(".csv"))

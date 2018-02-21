@@ -14,6 +14,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Parses file with information about entering (leaving) the building.
+ */
 public class FileParser {
     private final static String pattern = ".*(вход\\b|выход\\b).+(([0-1][0-9]|2[0-3]):[0-5][0-9]).*";
     private final static Pattern fileLinePattern = Pattern.compile(pattern);
@@ -26,6 +29,15 @@ public class FileParser {
         return pairsFromFile;
     }
 
+    /**
+     * Add {@link TimePair} to list, when the first value in list is OUT(выход). For example:
+     * if list starts with (OUT, 06:00) that mean that worker started his day in the office, so
+     * method add (IN, 00:00) to the top of the list
+     * Second option - to add (OUT, 23:59) to the end of the list, if list ends with IN. (that
+     * means that worker ended his day in the office)
+     * @param pairs
+     * @return
+     */
     List<TimePair> submitBoundaries(List<TimePair> pairs) {
         if (pairs.get(pairs.size() - 1).getAction().equals(ActionType.IN)) {
             pairs.add(new TimePair(ActionType.OUT, LocalTime.MAX));
@@ -36,6 +48,11 @@ public class FileParser {
         return new ArrayList<>(pairs);
     }
 
+    /**
+     * Validates every line in .csv file
+     * @param pairsStream stream of .csv file lines
+     * @return list of valid {@link TimePair} where every timePair represents line in .csv file
+     */
     List<TimePair> getValidTimePairs(Stream<String> pairsStream) {
         return pairsStream
                 .map(s -> {
